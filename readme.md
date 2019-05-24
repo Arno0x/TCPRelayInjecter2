@@ -20,19 +20,28 @@ The idea is to find a process running as the same standard (*non-privileged*) us
 
 `netsh advfirewall firewall show rule name=all`
 
-From there we just have to inject a TCP Relay assembly in it, passing it some arguments like a local port to listen to, a destination port and an optionnal destination IP to forward the traffic to.
+From there we just have to inject a TCP Relay assembly in the process fulfilling your needs, passing it some arguments like a local port to listen to, a destination port and an optionnal destination IP to forward the traffic to.
 
 Compile
 ----------------
+
+The injecter comes in two flavors achieving exactly the same goal: there's a C++ version (`TcpRelayInjecter.cpp`) and there's a C# version (`TcpRelayInjecter.cs`). You only need to compile one of these two files. It might be easier though to compile the C# injecter as it doesn't require VisualStudio or any other C++ compiler, it just needs the `csc.exe` compiler which comes with the .Net framework installed with any recent Windows OS.
+
 **Targetting 32 bits processes**:
-  1. You'll need the 32 bits version of both the DLL and the injecter
-  2. Refer to the comments in the headers of the `TcpRelay.cs` and `TcpRelayInjecter.cpp` files for compilation instructions
-  3. Don't forget to modify the .Net DLL to export the `EntryPoint` method.
+  - You'll need the **32 bits version** of both the DLL and the injecter
+  - Compile the DLL:
+    *Refer to the comments in the headers of the `TcpRelay.cs`
+    * Modify the .Net DLL to export the `EntryPoint` method as explained in the file header comments.
+  - Compile the injecter either using `TcpRelayInjecter.cpp` or `TcpRelayInjecter.cs`. Refer to the file header comments for compilation instructions.
+  
+  
 
 **Targetting 64 bits processes**:
-  1. You'll need the 64 bits version of both the DLL and the injecter
-  2. Refer to the comments in the headers of the `TcpRelay.cs` and `TcpRelayInjecter.cpp` files for compilation instructions
-  3. Don't forget to modify the .Net DLL to export the `EntryPoint` method.
+  - You'll need the **64 bits version** of both the DLL and the injecter
+  - Compile the DLL:
+    * Refer to the comments in the headers of the `TcpRelay.cs`
+    * Modify the .Net DLL to export the `EntryPoint` method as explained in the file header comments.
+  - Compile the injecter either using `TcpRelayInjecter.cpp` or `TcpRelayInjecter.cs`. Refer to the file header comments for compilation instructions.
 
 Usage
 ----------------
